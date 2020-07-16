@@ -6,7 +6,6 @@ const App = () => (
     <p>
       We found volenteer opportunities for you!
     </p>
-    <p>Tell us a little bit about yourself.</p>
   </div>
   
   
