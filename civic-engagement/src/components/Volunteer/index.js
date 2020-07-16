@@ -17,20 +17,20 @@ const App = () => (
     <fieldset class="form-group">
       <legend>interested in volunteering at a</legend>
       <div class="custom-control custom-checkbox">
-        <input type="checkbox" class="custom-control-input" id="defaultUnchecked"/>
-        <label class="custom-control-label" for="defaultUnchecked">food bank</label>
+        <input type="checkbox" class="custom-control-input" id="foodBank"/>
+        <label class="custom-control-label" for="foodBank">food bank</label>
       </div>
       <div class="custom-control custom-checkbox">
-        <input type="checkbox" class="custom-control-input" id="defaultUnchecked"/>
-        <label class="custom-control-label" for="defaultUnchecked">homeless shelter</label>
+        <input type="checkbox" class="custom-control-input" id="homelessShelter"/>
+        <label class="custom-control-label" for="homelessShelter">homeless shelter</label>
       </div>
       <div class="custom-control custom-checkbox">
-        <input type="checkbox" class="custom-control-input" id="defaultUnchecked"/>
-        <label class="custom-control-label" for="defaultUnchecked">pet rescue</label>
+        <input type="checkbox" class="custom-control-input" id="petRescue"/>
+        <label class="custom-control-label" for="petRescue">pet rescue</label>
       </div>
       <div class="custom-control custom-checkbox">
-        <input type="checkbox" class="custom-control-input" id="defaultUnchecked"/>
-        <label class="custom-control-label" for="defaultUnchecked">retirement community</label>
+        <input type="checkbox" class="custom-control-input" id="retirementCommunity"/>
+        <label class="custom-control-label" for="retirementCommunity">retirement community</label>
       </div>
     </fieldset>
 
