@@ -9,6 +9,8 @@ import PasswordForgetPage from '../PasswordForget';
 import HomePage from '../Home';
 import AccountPage from '../Account';
 import AdminPage from '../Admin';
+import VolunteerPage from '../Volunteer';
+import DirectoryPage from '../Directory';
 import volunteerPage from '../Utilities';
 
 import * as ROUTES from '../../constants/routes';
@@ -32,6 +34,8 @@ const App = () => (
       <Route exact path={ROUTES.HOME} component={HomePage} />
       <Route exact path={ROUTES.ACCOUNT} component={AccountPage} />
       <Route exact path={ROUTES.ADMIN} component={AdminPage} />
+      <Route exact path={ROUTES.VOLUNTEER} component={VolunteerPage}/>
+      <Route exact path ={ROUTES.DIRECTORY} component={DirectoryPage}/>
     </div>
   </Router>
 );
