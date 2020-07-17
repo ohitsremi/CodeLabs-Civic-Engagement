@@ -11,6 +11,7 @@ import AccountPage from '../Account';
 import AdminPage from '../Admin';
 import VolunteerPage from '../Volunteer';
 import DirectoryPage from '../Directory';
+import volunteerPage from '../Utilities';
 
 import * as ROUTES from '../../constants/routes';
 import { withAuthentication } from '../Session';
@@ -21,7 +22,8 @@ const App = () => (
       <Navigation />
  
       <hr />
- 
+
+      <Route exact path={ROUTES.volunteerPage} component={volunteerPage}/>
       <Route exact path={ROUTES.LANDING} component={LandingPage} />
       <Route exact path={ROUTES.SIGN_UP} component={SignUpPage} />
       <Route exact path={ROUTES.SIGN_IN} component={SignInPage} />
