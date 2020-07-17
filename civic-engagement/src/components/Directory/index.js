@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { Component } from 'react';
 import firebase from 'firebase';
 import "bootswatch/dist/minty/bootstrap.min.css";
@@ -82,22 +81,3 @@ class volunteerPage extends Component {
 }
 
 export default volunteerPage;
-
-
-
-=======
-import React from 'react';
-import "bootswatch/dist/minty/bootstrap.min.css"; 
- 
-const App = () => (
-  <div class="text-center">
-    <p>
-      We found volenteer opportunities for you!
-    </p>
-  </div>
-  
-  
-);
- 
-export default App;
->>>>>>> 571cdf54430da7748501489b8ba3ea78289aa7f6
