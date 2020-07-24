@@ -3,10 +3,11 @@ import firebase from 'firebase';
 import "bootswatch/dist/minty/bootstrap.min.css";
 import config from '../Firebase/firebase';
 
-function writeUserData(location, name, zip) {
+function writeUserData(catagory, location, name, zip) {
   var refence = firebase.database().ref("organizations/");
 
   var newData = {
+    Catagory: catagory,
     Address: location,
     Name: name,
     Zipcode: zip
@@ -47,13 +48,7 @@ class volunteerPage extends Component {
     return (
       <div>
         <div id="organization-container" class="text-center">
-          <h1>Here are some opportunities</h1>
-
-          <div class="text-center">
-            <p>
-              We found volenteer opportunities for you!
-                      </p>
-          </div>
+          <h1>We found volunteer opportunities for you!</h1>
 
           {/* Adding JS */}
           {Object.values(this.state.data).map(elem => (
