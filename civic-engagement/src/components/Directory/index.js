@@ -21,10 +21,11 @@ const filterObject = (obj, filter, filterValue) =>
 
 
 
-function writeUserData(location, name, zip) {
+function writeUserData(catagory, location, name, zip) {
   var refence = firebase.database().ref("organizations/");
 
   var newData = {
+    Catagory: catagory,
     Address: location,
     Name: name,
     Zipcode: zip
@@ -96,8 +97,7 @@ class volunteerPage extends Component {
   };
 
  
-  render() {
-    
+  render() {    
       return (
         <div>
           <div id="organization-container" class="text-center">
