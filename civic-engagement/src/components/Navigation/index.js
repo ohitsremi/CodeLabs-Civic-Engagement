@@ -46,7 +46,7 @@ const NavigationNonAuth = () => (
       <Link to={ROUTES.SIGN_IN}>Sign In</Link>
     </li>
     <li>
-      <Link to={ROUTES.volunteerPage}>Volunteer Opportunities</Link>
+      <Link to={ROUTES.VOLUNTEER}>Volunteer Opportunities</Link>
     </li>
   </ul>
 );
