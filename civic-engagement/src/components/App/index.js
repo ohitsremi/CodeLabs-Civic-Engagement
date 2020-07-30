@@ -7,6 +7,7 @@ import HomePage from '../Home';
 import AdminPage from '../Admin';
 import VolunteerPage from '../Volunteer';
 import DirectoryPage from '../Directory';
+import OrganizationPage from '../Organization';
 
 import * as ROUTES from '../../constants/routes';
 
@@ -21,7 +22,7 @@ const App = () => (
       <Route exact path={ROUTES.HOME} component={HomePage} />
       <Route exact path={ROUTES.ADMIN} component={AdminPage} />
       <Route exact path={ROUTES.VOLUNTEER} component={VolunteerPage}/>
-      <Route exact path ={ROUTES.DIRECTORY} component={DirectoryPage}/>
+      <Route exact path={ROUTES.ORGANIZATION} component={OrganizationPage}/>
     </div>
   </Router>
 );

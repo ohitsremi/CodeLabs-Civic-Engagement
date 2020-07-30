@@ -12,7 +12,7 @@ const App = () => (
 
     <h3>I am a...</h3>
     <Link to={ROUTES.VOLUNTEER}><button type="button" class="btn btn-primary btn-lg btn-block">VOLUNTEER</button></Link>
-    <button type="button" class="btn btn-outline-primary btn-lg btn-block">VOLUNTEER ORGANIZATION</button>
+    <Link to={ROUTES.ORGANIZATION}><button type="button" class="btn btn-outline-primary btn-lg btn-block">VOLUNTEER ORGANIZATION</button></Link>
     
 
   </div>

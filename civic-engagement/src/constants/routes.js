@@ -7,3 +7,4 @@ export const ADMIN = '/admin';
 export const PASSWORD_FORGET = '/pw-forget';
 export const VOLUNTEER = '/volunteer';
 export const DIRECTORY = '/directory';
+export const ORGANIZATION = '/organization'

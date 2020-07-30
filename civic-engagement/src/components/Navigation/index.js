@@ -11,6 +11,9 @@ const Navigation = () => (
     <li>
       <Link to={ROUTES.VOLUNTEER}>Volunteer Opportunities</Link>
     </li>
+    <li>
+      <Link to={ROUTES.ORGANIZATION}>Add Organization</Link>
+    </li>
   </ul>
 );
  

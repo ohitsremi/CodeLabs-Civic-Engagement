@@ -1,53 +1,9 @@
 import React, { Component } from 'react';
 import firebase from 'firebase';
 import "bootswatch/dist/minty/bootstrap.min.css";
-import config from '../Firebase/firebase';
 import SearchExample from '../Volunteer/index';
 import {Link} from 'react-dom';
 import {BrowserRouter as Router, Route,useParams, useLocation} from 'react-router-dom';
-
-
-// Filters the database that match the organization and user zipcode
-const filterObject = (obj, filter, filterValue) => 
-   Object.keys(obj).reduce((acc, val) => 
-   (obj[val][filter] != filterValue ? acc : {
-       ...acc,
-       [val]: obj[val]
-   }                                        
-), {});
-
-
-
-
-
-
-function writeUserData(catagory, location, name, zip) {
-  var refence = firebase.database().ref("organizations/");
-
-  var newData = {
-    Catagory: catagory,
-    Address: location,
-    Name: name,
-    Zipcode: zip
-  }
-  refence.push(newData);
-}
-
-
-
-
-// Gets the most recent zipcode form firebase
-function getZip(obj) {
-  var zip = 0;
-  Object.values(obj).map(elem =>
-      zip = elem.Zipcode,
-    )
-    
-  return Object.values(obj)[0];
-}
-
-
-
 
 class volunteerPage extends Component {
 
@@ -60,14 +16,7 @@ class volunteerPage extends Component {
     };
 
    
-
-
     // Get a database reference to our posts
-
-
-    if (!firebase.app.length) {
-      firebase.initializeApp(config);
-    }
 
     var reference = firebase.database().ref("organizations/");
     var referenceUser = firebase.database().ref("Users/");
@@ -76,7 +25,7 @@ class volunteerPage extends Component {
         var userData = snapshot.val();
         this.setState({ users: userData});
         console.log(userData);
-        console.log(getZip(this.state.users));
+        console.log(firebase.getZip(this.state.users));
       }, function (errorObject) {
         console.log("The read failed: " + errorObject.code);
       });
@@ -86,8 +35,8 @@ class volunteerPage extends Component {
     reference.on("value", (snapshot) => {
       var datas = snapshot.val();
       var zip = 0;
-      zip = getZip(this.state.users)
-      var filteredValue = filterObject(datas, "Zipcode", zip);
+      zip = firebase.getZip(this.state.users)
+      var filteredValue = firebase.filterObject(datas, "Zipcode", zip);
       this.setState({ data: filteredValue });
       console.log(datas);
     }, function (errorObject) {

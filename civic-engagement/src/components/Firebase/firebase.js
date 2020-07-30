@@ -14,6 +14,38 @@ const config = {
   measurementId: "G-Z29MPJGKH0"
 };
 
+  // Filters the database that match the organization and user zipcode
+const filterObject = (obj, filter, filterValue) => 
+   Object.keys(obj).reduce((acc, val) => 
+   (obj[val][filter] != filterValue ? acc : {
+       ...acc,
+       [val]: obj[val]
+   }                                        
+), {});
+
+function writeUserData(catagory, location, name, zip) {
+    var refence = Firebase.database().ref("organizations/");
+  
+    var newData = {
+      Catagory: catagory,
+      Address: location,
+      Name: name,
+      Zipcode: zip
+    }
+    refence.push(newData);
+  }
+
+// Gets the most recent zipcode form firebase
+function getZip(obj) {
+  var zip = 0;
+  Object.values(obj).map(elem =>
+      zip = elem.Zipcode,
+    )
+    
+  return Object.values(obj)[0];
+}
+  
+
 class Firebase{
     constructor(){
         app.initializeApp(config);
@@ -21,26 +53,15 @@ class Firebase{
         this.auth = app.auth();
         this.db = app.database();
     }
-  // *** Auth API ***
-  
-    doCreateUserWithEmailAndPassword = (email, password) =>
-        this.auth.createUserWithEmailAndPassword(email, password);
-    
-    doSignInWithEmailAndPassword = (email, password) =>
-        this.auth.signInWithEmailAndPassword(email, password);
 
-    doSignOut = () => this.auth.signOut();
-    
-    doPasswordReset = email => this.auth.sendPasswordResetEmail(email);
- 
-    doPasswordUpdate = password =>
-        this.auth.currentUser.updatePassword(password);
+    //** Organization API **/
 
-        // *** User API ***
- 
-    user = uid => this.db.ref(`users/${uid}`);
-
-    users = () => this.db.ref('users');
+    addOrganization = () => {
+        Firebase.database()
+        .ref("/")
+        .set(this.state);
+        console.log("NEW ORGANIZATION ADDED")
+    }
 }
  
 export default Firebase;
