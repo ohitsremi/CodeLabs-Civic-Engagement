@@ -1,7 +1,6 @@
 import 'firebase/database';
 import app from 'firebase/app'
 require ('firebase/auth');
-require ('firebase/database')
 
  
 const config = {
@@ -15,53 +14,26 @@ const config = {
   measurementId: "G-Z29MPJGKH0"
 };
 
-  // Filters the database that match the organization and user zipcode
-const filterObject = (obj, filter, filterValue) => 
-   Object.keys(obj).reduce((acc, val) => 
-   (obj[val][filter] != filterValue ? acc : {
-       ...acc,
-       [val]: obj[val]
-   }                                        
-), {});
-
-function writeUserData(catagory, location, name, zip) {
-    var refence = Firebase.database().ref("organizations/");
-  
-    var newData = {
-      Catagory: catagory,
-      Address: location,
-      Name: name,
-      Zipcode: zip
-    }
-    refence.push(newData);
-  }
-
-// Gets the most recent zipcode form firebase
-function getZip(obj) {
-  var zip = 0;
-  Object.values(obj).map(elem =>
-      zip = elem.Zipcode,
-    )
-    
-  return Object.values(obj)[0];
-}
-  
-
 class Firebase{
     constructor(){
-        app.initializeApp(config);
+      app.initializeApp(config);
 
-        var db = app.database().ref('organizations/');
-        var user = app.database().ref('Users/');
+      var db = app.database().ref('organizations/');
+      var user = app.database().ref('Users/');
+
     }
    
 
     //** Organization API **/
 
-    addOrganization = () => {
-        Firebase.database()
-        .ref("/")
-        .set(this.state);
+    addOrganization = (catagory, location, name, zip) => {
+      var newData = {
+        Catagory: catagory,
+        Address: location,
+        Name: name,
+        Zipcode: zip
+      }
+      Firebase.db.push(newData);
         console.log("NEW ORGANIZATION ADDED")
     }
 }

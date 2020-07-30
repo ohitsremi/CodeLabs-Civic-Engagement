@@ -1,10 +1,44 @@
 import React, { Component } from 'react';
-import firebase from '../Firebase';
+import firebase from 'firebase';
 import "bootswatch/dist/minty/bootstrap.min.css";
+import config from '../Firebase/firebase';
 import SearchExample from '../Volunteer/index';
 import {Link} from 'react-dom';
+import {BrowserRouter as Router, Route,useParams, useLocation} from 'react-router-dom';
 
-class App extends Component {
+
+// Filters the database that match the organization and user zipcode
+const filterObject = (obj, filter, filterValue) => 
+   Object.keys(obj).reduce((acc, val) => 
+   (obj[val][filter] != filterValue ? acc : {
+       ...acc,
+       [val]: obj[val]
+   }                                        
+), {});
+
+function writeUserData(catagory, location, name, zip) {
+  var refence = firebase.database().ref("organizations/");
+
+  var newData = {
+    Catagory: catagory,
+    Address: location,
+    Name: name,
+    Zipcode: zip
+  }
+  refence.push(newData);
+}
+
+// Gets the most recent zipcode form firebase
+function getZip(obj) {
+  var zip = 0;
+  Object.values(obj).map(elem =>
+      zip = elem.Zipcode,
+    )
+    
+  return Object.values(obj)[0];
+}
+
+class app extends Component {
 
   constructor() {
     super()
@@ -14,29 +48,32 @@ class App extends Component {
       users: {}
     };
 
-   
     // Get a database reference to our posts
 
-    //var reference = firebase.database().ref('organizations/');
-    //var referenceUser = firebase.database().ref("Users/");
 
-      firebase.user.on("child_added", (snapshot) => {
+    if (!firebase.app.length) {
+      firebase.initializeApp(config);
+    }
+
+    var reference = firebase.database().ref("organizations/");
+    var referenceUser = firebase.database().ref("Users/");
+
+      referenceUser.on("child_added", (snapshot) => {
         var userData = snapshot.val();
         this.setState({ users: userData});
         console.log(userData);
-        console.log(firebase.getZip(this.state.users));
+        console.log(getZip(this.state.users));
       }, function (errorObject) {
         console.log("The read failed: " + errorObject.code);
       });
   
 
       // Attach an asynchronous callback to read the data at our posts reference
-
-    firebase.db.on("value", (snapshot) => {
+    reference.on("value", (snapshot) => {
       var datas = snapshot.val();
       var zip = 0;
-      zip = firebase.getZip(this.state.users)
-      var filteredValue = firebase.filterObject(datas, "Zipcode", zip);
+      zip = getZip(this.state.users)
+      var filteredValue = filterObject(datas, "Zipcode", zip);
       this.setState({ data: filteredValue });
       console.log(datas);
     }, function (errorObject) {
@@ -45,10 +82,13 @@ class App extends Component {
     
   };
 
+ 
   render() {    
       return (
         <div>
           <div id="organization-container" class="text-center">
+            <h1>Here are some opportunities</h1>
+
             <div class="text-center">
               <p>
                 We found volenteer opportunities for you!
@@ -84,4 +124,4 @@ class App extends Component {
   }
 
 
-export default App;
+export default app;
