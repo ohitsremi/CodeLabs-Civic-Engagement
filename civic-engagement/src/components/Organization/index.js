@@ -1,10 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import firebase from 'firebase';
 import { Link } from 'react-router-dom';
 import * as ROUTES from '../../constants/routes'; 
 import "bootswatch/dist/minty/bootstrap.min.css"; 
+
+// const OrganizationItem = ({organizationItem: {organizationItem: Address, Catagories, Name, Zipcode}, id}) =>{
+//   const [zip, setZip] = useState(false);
+//   const onCheck = () => {
+//     setZip(!zip);
+//   };
+// }
+
  
 const App = () => (
+  
+
   <div class="container-fluid">
     <div class ="text-left">
       <h3>I am a... <span class="text-primary">Organization</span></h3>

@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import firebase from 'firebase';
+import firebase from '../Firebase';
 import "bootswatch/dist/minty/bootstrap.min.css";
 import SearchExample from '../Volunteer/index';
 import {Link} from 'react-dom';
-import {BrowserRouter as Router, Route,useParams, useLocation} from 'react-router-dom';
 
-class volunteerPage extends Component {
+class App extends Component {
 
   constructor() {
     super()
@@ -18,10 +17,10 @@ class volunteerPage extends Component {
    
     // Get a database reference to our posts
 
-    var reference = firebase.database().ref("organizations/");
-    var referenceUser = firebase.database().ref("Users/");
+    //var reference = firebase.database().ref('organizations/');
+    //var referenceUser = firebase.database().ref("Users/");
 
-      referenceUser.on("child_added", (snapshot) => {
+      firebase.user.on("child_added", (snapshot) => {
         var userData = snapshot.val();
         this.setState({ users: userData});
         console.log(userData);
@@ -32,7 +31,8 @@ class volunteerPage extends Component {
   
 
       // Attach an asynchronous callback to read the data at our posts reference
-    reference.on("value", (snapshot) => {
+
+    firebase.db.on("value", (snapshot) => {
       var datas = snapshot.val();
       var zip = 0;
       zip = firebase.getZip(this.state.users)
@@ -49,8 +49,6 @@ class volunteerPage extends Component {
       return (
         <div>
           <div id="organization-container" class="text-center">
-            <h1>Here are some opportunities</h1>
-
             <div class="text-center">
               <p>
                 We found volenteer opportunities for you!
@@ -86,4 +84,4 @@ class volunteerPage extends Component {
   }
 
 
-export default volunteerPage;
+export default App;

@@ -1,6 +1,7 @@
 import 'firebase/database';
 import app from 'firebase/app'
 require ('firebase/auth');
+require ('firebase/database')
 
  
 const config = {
@@ -50,9 +51,10 @@ class Firebase{
     constructor(){
         app.initializeApp(config);
 
-        this.auth = app.auth();
-        this.db = app.database();
+        var db = app.database().ref('organizations/');
+        var user = app.database().ref('Users/');
     }
+   
 
     //** Organization API **/
 

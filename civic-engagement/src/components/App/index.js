@@ -23,6 +23,7 @@ const App = () => (
       <Route exact path={ROUTES.ADMIN} component={AdminPage} />
       <Route exact path={ROUTES.VOLUNTEER} component={VolunteerPage}/>
       <Route exact path={ROUTES.ORGANIZATION} component={OrganizationPage}/>
+      <Route exact path={ROUTES.DIRECTORY} component={DirectoryPage}/>
     </div>
   </Router>
 );
