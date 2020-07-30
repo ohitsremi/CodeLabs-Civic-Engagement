@@ -45,7 +45,6 @@ class volunteerPage extends Component {
     
   };
 
- 
   render() {    
       return (
         <div>
