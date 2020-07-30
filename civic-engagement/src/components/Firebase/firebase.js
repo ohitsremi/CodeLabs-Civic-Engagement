@@ -16,31 +16,26 @@ const config = {
 
 class Firebase{
     constructor(){
-        app.initializeApp(config);
+      app.initializeApp(config);
 
-        this.auth = app.auth();
-        this.db = app.database();
+      var db = app.database().ref('organizations/');
+      var user = app.database().ref('Users/');
+
     }
-  // *** Auth API ***
-  
-    doCreateUserWithEmailAndPassword = (email, password) =>
-        this.auth.createUserWithEmailAndPassword(email, password);
-    
-    doSignInWithEmailAndPassword = (email, password) =>
-        this.auth.signInWithEmailAndPassword(email, password);
+   
 
-    doSignOut = () => this.auth.signOut();
-    
-    doPasswordReset = email => this.auth.sendPasswordResetEmail(email);
- 
-    doPasswordUpdate = password =>
-        this.auth.currentUser.updatePassword(password);
+    //** Organization API **/
 
-        // *** User API ***
- 
-    user = uid => this.db.ref(`users/${uid}`);
-
-    users = () => this.db.ref('users');
+    addOrganization = (catagory, location, name, zip) => {
+      var newData = {
+        Catagory: catagory,
+        Address: location,
+        Name: name,
+        Zipcode: zip
+      }
+      Firebase.db.push(newData);
+        console.log("NEW ORGANIZATION ADDED")
+    }
 }
  
 export default Firebase;

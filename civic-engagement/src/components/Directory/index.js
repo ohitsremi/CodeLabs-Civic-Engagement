@@ -16,11 +16,6 @@ const filterObject = (obj, filter, filterValue) =>
    }                                        
 ), {});
 
-
-
-
-
-
 function writeUserData(catagory, location, name, zip) {
   var refence = firebase.database().ref("organizations/");
 
@@ -33,9 +28,6 @@ function writeUserData(catagory, location, name, zip) {
   refence.push(newData);
 }
 
-
-
-
 // Gets the most recent zipcode form firebase
 function getZip(obj) {
   var zip = 0;
@@ -46,10 +38,7 @@ function getZip(obj) {
   return Object.values(obj)[0];
 }
 
-
-
-
-class volunteerPage extends Component {
+class app extends Component {
 
   constructor() {
     super()
@@ -58,9 +47,6 @@ class volunteerPage extends Component {
       data: {},
       users: {}
     };
-
-   
-
 
     // Get a database reference to our posts
 
@@ -138,4 +124,4 @@ class volunteerPage extends Component {
   }
 
 
-export default volunteerPage;
+export default app;
