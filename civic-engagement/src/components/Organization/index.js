@@ -49,6 +49,7 @@ const App = () => (
       <label class="col-form-label col-form-label-lg" for="inputLarge">Send volunteer requests to</label>
       <input class="form-control form-control-lg" type="text" placeholder="email" id="inputLarge"></input>
     </div>
+    <Link to={ROUTES.THANKYOU}><button type="button" class="btn btn-primary btn-lg btn-block">SUBMIT</button></Link>
     
   </div>
     
