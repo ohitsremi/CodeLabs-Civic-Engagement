@@ -14,7 +14,7 @@ class App extends Component {
     this.state = {
       zip: null,
       isFoodBank: false,
-      isHomelessShelter: null,
+      isHomelessShelter: false,
       isPetResuce: false,
       isEducation:false,
       isRetirementCommunity: false
