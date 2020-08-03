@@ -1,3 +1,4 @@
+import firebase from "firebase"
 import 'firebase/database';
 import app from 'firebase/app'
 require ('firebase/auth');
@@ -17,25 +18,11 @@ const config = {
 class Firebase{
     constructor(){
       app.initializeApp(config);
-
-      var db = app.database().ref('organizations/');
-      var user = app.database().ref('Users/');
-
+      this.db = app.database();
     }
-   
-
-    //** Organization API **/
-
-    addOrganization = (catagory, location, name, zip) => {
-      var newData = {
-        Catagory: catagory,
-        Address: location,
-        Name: name,
-        Zipcode: zip
-      }
-      Firebase.db.push(newData);
-        console.log("NEW ORGANIZATION ADDED")
-    }
+    //*** Organization API ***/
+    organization = uid => this.db.ref('organizations/${uid}');
+    organizations = () =>this.db.ref('organizations');
 }
  
 export default Firebase;
