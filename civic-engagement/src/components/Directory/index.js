@@ -5,7 +5,6 @@ import "bootswatch/dist/minty/bootstrap.min.css";
 import config from '../Firebase/firebase';
 import SearchExample from '../Volunteer/index';
 import {Link} from 'react-dom';
-import {BrowserRouter as Router, Route,useParams, useLocation} from 'react-router-dom';
 
 
 // Filters the database that match the organization and user zipcode
@@ -59,8 +58,7 @@ function getCategories(obj) {
   return Object.values(obj)[0];
 }
 
-
-class volunteerPage extends Component {
+class DirectoryPage extends Component {
 
   constructor() {
     super()
@@ -178,5 +176,4 @@ class volunteerPage extends Component {
     }  
   }
 
-
-export default volunteerPage;
+export default DirectoryPage;
