@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import firebase from 'firebase';
+
 import "bootswatch/dist/minty/bootstrap.min.css";
 import config from '../Firebase/firebase';
 import SearchExample from '../Volunteer/index';
@@ -16,17 +17,33 @@ const filterObject = (obj, filter, filterValue) =>
    }                                        
 ), {});
 
-function writeUserData(catagory, location, name, zip) {
+
+
+
+
+
+function writeUserData(zip) {
+  var refence = firebase.database().ref("Users/");
+
+  var newData = {
+    Zipcode: zip
+  }
+  refence.push(newData);
+}
+
+function writeOrgData(address, categories, name, zip) {
   var refence = firebase.database().ref("organizations/");
 
   var newData = {
-    Catagory: catagory,
-    Address: location,
+    Address: address,
+    Categories: categories,
     Name: name,
     Zipcode: zip
   }
   refence.push(newData);
 }
+
+
 
 // Gets the most recent zipcode form firebase
 function getZip(obj) {
@@ -35,10 +52,15 @@ function getZip(obj) {
       zip = elem.Zipcode,
     )
     
+  return Object.values(obj)[1];
+}
+
+function getCategories(obj) {
   return Object.values(obj)[0];
 }
 
-class app extends Component {
+
+class volunteerPage extends Component {
 
   constructor() {
     super()
@@ -47,6 +69,9 @@ class app extends Component {
       data: {},
       users: {}
     };
+
+   
+
 
     // Get a database reference to our posts
 
@@ -58,11 +83,15 @@ class app extends Component {
     var reference = firebase.database().ref("organizations/");
     var referenceUser = firebase.database().ref("Users/");
 
-      referenceUser.on("child_added", (snapshot) => {
+    //writeUserData(18503);
+    //writeOrgData("321 paw Street, New York, Ny","pet rescue", "Paws for Life", 10004);
+      referenceUser.orderByChild("dateAdded").limitToLast(1).once("child_added", (snapshot) => {
         var userData = snapshot.val();
+        console.log(JSON.stringify(snapshot.val()))
         this.setState({ users: userData});
         console.log(userData);
         console.log(getZip(this.state.users));
+        console.log(getCategories(this.state.users))
       }, function (errorObject) {
         console.log("The read failed: " + errorObject.code);
       });
@@ -74,7 +103,33 @@ class app extends Component {
       var zip = 0;
       zip = getZip(this.state.users)
       var filteredValue = filterObject(datas, "Zipcode", zip);
-      this.setState({ data: filteredValue });
+      var cate = getCategories(this.state.users);
+      var categoryLength = cate.length;
+      var end = cate.length;
+      var i;
+      console.log(cate);
+      //data to render
+      let copy=[]
+      let res = {};
+      var filteredCategories = {};
+      // var filteredCategories = filterObject(filteredValue,"Categories", cate[0]);
+      for(let k=0; k<categoryLength; k++){
+        filteredCategories = filterObject(filteredValue,"Categories", cate[k]);
+        console.log(filteredCategories);
+        Object.assign(res,filteredCategories);
+      }
+      console.log(res);
+      //console.log(filteredCategories);
+      this.setState({data: res});
+    
+      /*
+      for(i=0; i<cate.length; i++) {
+        var filteredCategories = filterObject(filteredValue,"Categories", cate[i]);
+        console.log(filteredCategories);
+        this.setState({data:filteredCategories});
+      }
+      */
+      
       console.log(datas);
     }, function (errorObject) {
       console.log("The read failed: " + errorObject.code);
@@ -124,4 +179,4 @@ class app extends Component {
   }
 
 
-export default app;
+export default volunteerPage;
